@@ -24,9 +24,16 @@ export const taskSlice = createSlice({
     name:'tasks',
     initialState:initialState,//Esto es lo mismo que solo colocar initialstate
     reducers:{
-
+        addTask:(state,action)=>{
+            //en payload se encuentra lo que llega desde la funcion
+            const taskSend = action.payload
+            //con el state actualizamos el estado y push
+            state.push(taskSend)
+        }
     }
 })
+
+export const {addTask} = taskSlice.actions
 
 //Exportamos sus reducer 
 export default taskSlice.reducer
