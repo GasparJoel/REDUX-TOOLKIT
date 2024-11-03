@@ -31,9 +31,14 @@ export const taskSlice = createSlice({
             state.push(taskSend)
         },
         deleteTask :(state,action)=>{
-            const taskDelete = action.payload
+            const taskfound= state.find(task=>task.id ===action.payload.id )
+            
+                if (taskfound) {
+                    return state.filter(task=>task.id!==taskfound.id)
+                }
+            
 
-           return state.filter(task=>task.id!==taskDelete.id)
+          
             
         }
 
