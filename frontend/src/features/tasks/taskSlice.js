@@ -29,11 +29,18 @@ export const taskSlice = createSlice({
             const taskSend = action.payload
             //con el state actualizamos el estado y push
             state.push(taskSend)
+        },
+        deleteTask :(state,action)=>{
+            const taskDelete = action.payload
+
+           return state.filter(task=>task.id!==taskDelete.id)
+            
         }
+
     }
 })
 
-export const {addTask} = taskSlice.actions
+export const {addTask , deleteTask} = taskSlice.actions
 
 //Exportamos sus reducer 
 export default taskSlice.reducer
