@@ -10,8 +10,10 @@ export const TaskList = () => {
   console.log(taskState)
   return (
     <div>
+      <header>
+        <h2>Hay {taskState.length}  Tasks</h2> <p> <Link to={'/create-task'} className="bg-green-600 px-5 rounded-2xl text-white" >  Create Task</Link>  </p>
 
-      <h2>LISTA DE TASK </h2> <p> <Link to={'/create-task'} className="bg-green-600 px-5 rounded-2xl text-white" >  Create</Link>  </p>
+      </header>
 
       {
        taskState && taskState.map(task=>(
