@@ -10,7 +10,7 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<TaskList/>} />
-          <Route path="/task" element={<TaskForm/>} />
+          <Route path="/create-task" element={<TaskForm/>} />
         </Routes>
       
       

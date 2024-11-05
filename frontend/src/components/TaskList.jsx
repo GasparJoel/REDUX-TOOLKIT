@@ -11,7 +11,7 @@ export const TaskList = () => {
   return (
     <div>
 
-      <h2>LISTA DE TASK </h2> <p> <Link to={'/task'} className="bg-green-600 px-5 rounded-2xl text-white" >  Create</Link>  </p>
+      <h2>LISTA DE TASK </h2> <p> <Link to={'/create-task'} className="bg-green-600 px-5 rounded-2xl text-white" >  Create</Link>  </p>
 
       {
        taskState && taskState.map(task=>(
