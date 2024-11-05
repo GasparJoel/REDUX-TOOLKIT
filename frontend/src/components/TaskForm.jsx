@@ -1,23 +1,31 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux";
-import { addTask  } from "../features/tasks/taskSlice";
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { addTask ,editTask  } from "../features/tasks/taskSlice";
 import {v4 as uuid  } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export const TaskForm = () => {
 
 
   const navigate = useNavigate()
+//Para traer las funciones de los reduces task
+const dispatch  = useDispatch()
+
+const params = useParams()
+
+//Traemos las tareas 
+const tasks = useSelector(state =>state.tasks)
 
   const [task, setTask] = useState({
     title: "",
-    desccription:""
+    description:""
   })
-  //Para traer las funciones de los reduces task
-   const dispatch  = useDispatch()
+  
+   
 
   const HandleChange=(e)=>{
     //console.log(e.target.name ,e.target.value )
     const {name , value} = e.target
+    
     setTask({
       ...task,
       [name]:value,
@@ -27,13 +35,29 @@ export const TaskForm = () => {
 
   const HandleSubmit = (e)=>{
     e.preventDefault()
-    dispatch(addTask({
-      ...task,
-      id:uuid(),
-      completed:false,
-    }))
+
+    if (params.id) {
+      dispatch(editTask(task))
+    }else{
+      dispatch(addTask({
+        ...task,
+        id:uuid(),
+        completed:false,
+      }))
+    }
+   
+
+
     navigate('/')
   }
+
+  useEffect(() => {
+    if (params.id) {
+     setTask( tasks.find(task=>task.id === params.id))
+     
+    }
+  }, [])
+  
 
   return (
     <div className="bg-zinc-800 p-10 w-full rounded-md max-w-md">
@@ -43,6 +67,7 @@ export const TaskForm = () => {
         name="title"
          className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
          placeholder="Titulo"
+         value={task.title}
          onChange={HandleChange}
         />
         <h5 className="font-bold">Descripcion</h5>
@@ -50,10 +75,18 @@ export const TaskForm = () => {
         name="description"
         className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
         placeholder="Descripción"
+        value={task.description}
         onChange={HandleChange}
+        
         />
         
-        <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded-md">Registrar </button>
+        <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded-md">
+          {
+            params.id ? "EDITAR":"REGISTRAR"
+          }
+          
+          
+          </button>
 
 
       </form>
