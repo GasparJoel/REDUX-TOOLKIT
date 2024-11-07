@@ -17,7 +17,8 @@ const tasks = useSelector(state =>state.tasks)
 
   const [task, setTask] = useState({
     title: "",
-    description:""
+    description:"",
+    completed:""
   })
   
    
@@ -46,8 +47,6 @@ const tasks = useSelector(state =>state.tasks)
       }))
     }
    
-
-
     navigate('/')
   }
 
@@ -77,8 +76,18 @@ const tasks = useSelector(state =>state.tasks)
         placeholder="Descripción"
         value={task.description}
         onChange={HandleChange}
-        
         />
+
+        {
+          params.id?
+          <select name="completed" value={task.completed} onChange={HandleChange} className="w-full bg-zinc-600 text-white px-4 py-2 my-2" id="">
+            <option value="encurso">En curso</option>
+            <option value="pendiente">pendiente</option>
+            <option value="finalizado">Finalizado</option>
+            
+          </select> :
+           null
+        }
         
         <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded-md">
           {

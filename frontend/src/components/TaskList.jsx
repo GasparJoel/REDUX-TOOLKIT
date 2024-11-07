@@ -15,13 +15,21 @@ export const TaskList = () => {
 
       </header>
 
-      {
-       taskState && taskState.map(task=>(
+    <body>
+
+      <div className="grid grid-cols-3 gap-2">
+        {
+        taskState && taskState.map(task=>(
+            
+          <ItemTask key={task.id} task={task} />
           
-        <ItemTask key={task.id} task={task} />
-        
-        ))
-      }
+          ))
+        }
+
+      </div>
+      
+    </body>
+      
 
     </div>
   )

@@ -19,8 +19,14 @@ const ItemTask = ({ task}) => {
       </header>
       
       <p> {task.description} </p>
-      {task.completed ? <h1 className="bg-red-600">Completado </h1> 
-      : <h1 className="bg-red-600 w-full max-w-20 px-1 rounded-md my-2">Pendiente</h1>}
+      
+      {task.completed === 'pendiente' ? (
+          <h1 className="bg-red-600 w-full max-w-20 px-1 rounded-md my-2">Pendiente</h1>
+        ) : task.completed === 'encurso' ? (
+          <h1 className="bg-orange-600 w-full max-w-20 px-1 rounded-md my-2">En Curso</h1>
+        ) : task.completed === 'finalizado' ? (
+          <h1 className="bg-green-600 w-full max-w-20 px-1 rounded-md my-2">Finalizado</h1>
+        ) : null}
     </div>
   );
 };
